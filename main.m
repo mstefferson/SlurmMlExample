@@ -1,4 +1,9 @@
 function main()
+% Matlab function that reads in an input, modifies the input,
+% and saves to file. This example code can be called in
+% matlab, but it serves as an example for running code
+% on a cluster
+
 % get date time
 tic()
 dateTime = datestr(now);
