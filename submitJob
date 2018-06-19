@@ -1,0 +1,23 @@
+#! /bin/bash
+#
+# ./submitHr jobName 
+
+# Hard code working dir
+homeDir=`pwd`;
+
+echo "In $homeDir"
+
+# Variables from inputs
+if [ $# -le 0 ]
+then
+  echo "no jobname given"
+  jobName=example
+  echo "jobname is $jobName"
+else
+  jobName=$1;
+  echo "jobname is $jobName"
+fi
+
+# submit!
+echo "sbatch --job-name=$jobName summitSlurmCont.sh"
+sbatch --job-name=$jobName summitSlurm.sh
