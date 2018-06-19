@@ -1,0 +1,11 @@
+# param files
+initParams.m
+# outputs
+outputs/*
+# matlab files
+*.mat
+# temp vim files
+*.swo
+*.swp
+src/*.swo
+src/*.swp

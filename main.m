@@ -1,13 +1,16 @@
 function main()
-% get start time
-dateTime = datestr(now)
+% get date time
+tic()
+dateTime = datestr(now);
+dateStart = datestr(now, 'yyyymmddHHMMSS');
 fprintf('Starting %s: %s\n', mfilename, dateTime);
 % add src 2 path
 currentDir = pwd;
 addpath( genpath( [currentDir '/src'] ) );
 % make Output Directories
-if ~exist('output', 'dir'); 
-  mkdir('./output'); 
+outputDir = 'outputs';
+if ~exist(outputDir, 'dir'); 
+  mkdir(outputDir); 
 end
 % get job's run params
 if exist('initParams.m','file') == 0
@@ -25,8 +28,11 @@ myOutput.o3 = addnoise2array(myParams.cell1{3});
 fprintf('Built output\n')
 disp(myOutput)
 % Save it to a file
-outStr = [dateTime '_output.mat']
+outStr = [dateStart '_' myParams.runID '_output.mat'];
 save(outStr, 'myOutput')
-fprintf('Saved file as: %s', outStr)
+fprintf('Saved file as: %s\n', outStr)
 % move file
-movefile(outStr, 'src')
+movefile(outStr, outputDir)
+runTime = toc();
+fprintf('Finished %s: %s in %f (s)\n', mfilename, dateTime, runTime);
+
