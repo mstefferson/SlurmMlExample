@@ -15,8 +15,8 @@
 
 # Set the output file name to [jobid].out (or leave as default of slurm-[jobid].out)
 
-#SBATCH -o job-[jobid].out
-#SBATCH -e job-[jobid].err
+#SBATCH -o job_%x_%j.out
+#SBATCH -e job_%x_%j.err
 
 # Allocation to ucb-general (default)
 

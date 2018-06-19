@@ -2,6 +2,11 @@
 initParams.m
 # outputs
 outputs/*
+*err
+*out
+# text files
+jobRunning.txt
+jobFinished.txt
 # matlab files
 *.mat
 # temp vim files
