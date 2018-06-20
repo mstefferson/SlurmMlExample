@@ -1,9 +1,12 @@
-#! /bin/bash
+#!/bin/bash
 #
 # ./submitHr jobName 
 
+# load slurm/summit
+module load slurm/summit
+
 # Hard code working dir
-homeDir=`pwd`;
+homeDir=`pwd`
 
 echo "In $homeDir"
 
@@ -19,5 +22,5 @@ else
 fi
 
 # submit!
-echo "sbatch --job-name=$jobName summitSlurmCont.sh"
+echo "sbatch --job-name=$jobName summitSlurm.sh"
 sbatch --job-name=$jobName summitSlurm.sh

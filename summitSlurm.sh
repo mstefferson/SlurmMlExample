@@ -1,4 +1,6 @@
 #!/bin/bash
+
+# === List of SBATCH arguements ===
 # Lines starting with #SBATCH are treated by bash as comments, but interpreted by sbatch
 # as arguments.  For more details about usage of these arguments see "man sbatch"
 
@@ -11,21 +13,22 @@
 
 #SBATCH --nodes 1
 #SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task 12
+#SBATCH --cpus-per-task 1
 
-# Set the output file name to [jobid].out (or leave as default of slurm-[jobid].out)
+# Set the output file name
 
 #SBATCH -o job_%x_%j.out
 #SBATCH -e job_%x_%j.err
 
 # Allocation to ucb-general (default)
 
-#SBATCH -A ucb-general
+#SBATCH -A ucb-summit-smr
+# SBATCH -A ucb-general
 
 # Select the normal QOS (comperable to a queue)
 # If your jobs are longer, this may need to be changed
 # to long or condo
-#SBATCH --qos=normal
+#SBATCH --qos=condo
 
 # Set partition to shas (CPU node, 24 hour cap)
 #SBATCH --partition=shas
@@ -35,15 +38,19 @@
 #SBATCH --mail-user=michael.stefferson@colorado.edu
 
 # Load any modules you need here
+# === List of SBATCH arguements ===
+module purge 
 module load matlab/R2016b
+#module load python
 
-# Execute the program.
+# ===  Additional commands  ===
 echo "Start time: `date`"
 echo "Submit dir: ${SLURM_SUBMIT_DIR}"
 echo "Job name: ${SLURM_JOB_NAME}" 
 echo "Running ${SLURM_NNODES} nodes. ${SLURM_NTASKS_PER_NODE} tasks per node. ${SLURM_CPUS_PER_TASK} processors per task"
 echo "In dir `pwd`"
 touch jobRunning.txt
+# ===  Running the program ===
 # Run matlab program
 matlab -nodesktop -nosplash \
   -r  "try, main, catch, exit(1), end, exit(0);"
