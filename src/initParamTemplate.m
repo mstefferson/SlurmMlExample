@@ -1,4 +1,11 @@
 function myParams = initParams()
+% This a parameter config file called by main(). 
+% The initParams.m is not git tracked, but 
+% src/initParamsTemplate.m is. It's nice to
+% have a template for your parameter inputs, but
+% it's annoying to git track the parameter file you are 
+% constantly changing
+
 % put the parameters in structure
 % var 1 (float/integer)
 myParams.runID = 'an_example';
