@@ -22,15 +22,16 @@
 
 # Allocation to ucb-general (default)
 
-#SBATCH -A ucb-summit-smr
-# SBATCH -A ucb-general
+#SBATCH -A ucb-general
 
-# Select the normal QOS (comperable to a queue)
-# If your jobs are longer, this may need to be changed
+# Select the debug QOS (for testing)
+# QOS modifies job resources like walltime.
+# When running an actual job (<1 day), this should be changed to normal.
+# If your jobs are longer (<7 day), this may need to be changed
 # to long or condo
-#SBATCH --qos=condo
+#SBATCH --qos=debug
 
-# Set partition to shas (CPU node, 24 hour cap)
+# Set partition to shas (CPU node)
 #SBATCH --partition=shas
 
 # email (change this)
