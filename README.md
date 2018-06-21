@@ -16,12 +16,13 @@ main()
 ## On summit
 To start, ssh to summit to and clone the repository on there. When you first login, you are on a 'login' node. To submit jobs, you use Slurm. You may want to move this repo to /projects/username (to find username, type `whoami` in the terminal) at some point (see below), but it isn't necessary for our purposes.
 
-Slurm is a job submission software. All jobs (except for simple bash commands), should to submitted through slurm. You a bash script, *sh (here, summitSlurm.sh), that contains information about your job submission, modules to load, as well as the actual command. Some of the info it tells slurm is what partition (computer type) you want to use, a wall time, etc.
-First, ssh to scompile
+Slurm is a job submission software. All jobs (except for simple bash commands), should to submitted through slurm. You a bash script, \*sh (here, summitSlurm.sh), that contains information about your job submission, modules to load, as well as the actual command. Some of the info it tells slurm is what partition (computer type) you want to use, a wall time, etc.
+
+When you first login, you are in a login node. Slurm sends jobs to the compute job. The compile node is a little more easier to use because it already had some modules loaded (like slurm!).  I typically ssh to scompile, and work from here
 ```bash
 ssh scompile
 ```
-When you first login, you are in a login node. Slurm sends jobs to the compute job. The compile node is a little more easier to use because it already had some modules loaded (like slurm!). 
+But I've set things up so this isn't necessary. Probably a good habit though.
 
 Also, the job script currently is sent up to send me an email when it's done. Edit the line
 #SBATCH --mail-user=michael.stefferson@colorado.edu
@@ -31,7 +32,10 @@ Note, if you're on summit, you will probably want to clone this repo into you pr
 to /scratch/summit/username. This is for storage.storage.
 
 ### Making an sbatch call to submit
+
 You use the sbatch command to tell slurm you want to submit a job. 
+#### If you're on scompile
+If you're on scompile, you can just run:
 
 ```bash
 sbatch --job-name=myjob summitSlurm.sh
@@ -44,10 +48,16 @@ squeue -u my_user_name
 ```
 For me, my username is mist7261. Type whoami in bash to see yours.
 
+#### If you're on login
+If you're on the login node, you need to load the slurm module first
+```bash
+module load slurm/summit
+sbatch --job-name=myjob summitSlurm.sh
+```
 ### Use the executeable
 I like to use an excuteable to submit my jobs. The executeable will do a few things, then submit the job. I like to do this when things get more complicated.
 ```bash
 ./jobSubmit myjob
 ```
-This will submit the job for you! Check the status using squeue.
+This will submit the job for you! Check the status using squeue. This will work on login in node without you having to load slurm (it does it for you)
 
