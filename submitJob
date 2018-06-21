@@ -21,6 +21,9 @@ else
   echo "jobname is $jobName"
 fi
 
-# submit!
-echo "sbatch --job-name=$jobName summitSlurm.sh"
-sbatch --job-name=$jobName summitSlurm.sh
+# submit! 
+echo "sbatch --export=NONE --job-name=$jobName summitSlurm.sh"
+sbatch --export=NONE --job-name=$jobName summitSlurm.sh
+# Note, need to set export flag to None
+# sbatch is aliased to include this, but aliases
+# don't work in shell scripts
